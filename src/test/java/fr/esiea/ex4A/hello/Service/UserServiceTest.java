@@ -57,6 +57,9 @@ public class UserServiceTest {
         userRepository.addUser(userInfo);
         userRepository.addUser(userInfo2);
         userRepository.addUser(userInfo3);
+        userRepository.cacheData.put(userInfo, 25);
+        userRepository.cacheData.put(userInfo2, 29);
+        userRepository.cacheData.put(userInfo3, 26);
 
         List<UserInfo> userMatches = userService.matches("test", "FR");
         assertEquals(1, userMatches.size());
