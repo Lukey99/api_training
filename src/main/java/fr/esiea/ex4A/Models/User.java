@@ -1,6 +1,5 @@
 package fr.esiea.ex4A.Models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class User {
     public final String name;
@@ -15,4 +14,19 @@ public class User {
         this.country_id = country_id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public String getCountry_id() {
+        return country_id;
+    }
 }

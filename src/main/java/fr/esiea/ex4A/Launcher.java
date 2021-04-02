@@ -1,5 +1,6 @@
 package fr.esiea.ex4A;
 
+import fr.esiea.ex4A.Service.AgifyClient;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
