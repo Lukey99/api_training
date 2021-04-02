@@ -8,11 +8,14 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.List;
 
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
@@ -44,8 +47,8 @@ public class MatchControllerIT {
         mockMvc
             .perform(MockMvcRequestBuilders.get("/api/matches?userName=michael&userCountry=FR"))
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$[0].name").value("jane"))
-            .andExpect(jsonPath("$[0].twitter").value("jane"));
+            .andExpect((ResultMatcher) jsonPath("$[0].name").value("jane"))
+            .andExpect((ResultMatcher) jsonPath("$[0].twitter").value("jane"));
 
         verify(userService).matches("michael", "FR");
 

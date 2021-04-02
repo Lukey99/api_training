@@ -8,21 +8,23 @@ import fr.esiea.ex4A.Service.AgifyClient;
 import fr.esiea.ex4A.Service.UserService;
 import okhttp3.MediaType;
 import okhttp3.ResponseBody;
+import org.json.JSONException;
 import org.junit.jupiter.api.Test;
-import org.mockito.internal.verification.Calls;
 import retrofit2.Call;
 import retrofit2.Response;
+import retrofit2.mock.Calls;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.*;
 
 public class UserServiceTest {
 
     @Test
-    public void registerUserTest() throws IOException {
+    public void registerUserTest() throws IOException, JSONException {
         AgifyClient agifyClient = mock(AgifyClient.class);
         String responseString = "{\"name\":\"test\",\"age\":20,\"count\":1000,\"country_id\":\"FR\"}";
         ResponseBody responseBody = ResponseBody.create(MediaType.parse("application/json"), responseString);
@@ -69,7 +71,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void getUserTest() throws IOException {
+    public void getUserTest() throws IOException, JSONException {
         AgifyClient agifyClient = mock(AgifyClient.class);
         String responseString = "{\"name\":\"test\",\"age\":20,\"count\":1000,\"country_id\":\"FR\"}";
         ResponseBody responseBody = ResponseBody.create(MediaType.parse("application/json"), responseString);
