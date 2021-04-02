@@ -34,23 +34,23 @@ public class MatchControllerIT {
     @Test
     public void matchesThenReturnsListOfUsers() throws Exception {
 
-        UserInfo userInfo = new UserInfo("test@test.fr", "Emile", "Emile", "US", "M", "F");
-        UserInfo userInfo2 = new UserInfo("test2@test.fr", "Isabelle", "Isabelle", "FR", "F", "M");
-        UserInfo userInfo3 = new UserInfo("test3@test.fr", "Ethan", "Ethan", "FR", "M", "F");
+        UserInfo userInfo = new UserInfo("test@test.fr", "Emile", "emile", "US", "M", "F");
+        UserInfo userInfo2 = new UserInfo("test2@test.fr", "Isabelle", "isabelle", "FR", "F", "M");
+        UserInfo userInfo3 = new UserInfo("test3@test.fr", "Ethan", "ethan", "FR", "M", "F");
 
         userService.registerUser(userInfo);
         userService.registerUser(userInfo2);
         userService.registerUser(userInfo3);
 
-        when(userService.matches("michael", "FR")).thenReturn(List.of(userInfo2));
+        when(userService.matches("Emile", "FR")).thenReturn(List.of(userInfo2));
 
         mockMvc
-            .perform(MockMvcRequestBuilders.get("/api/matches?userName=michael&userCountry=FR"))
+            .perform(MockMvcRequestBuilders.get("/api/matches?userName=Emile&userCountry=FR"))
             .andExpect(status().isOk())
-            .andExpect((ResultMatcher) jsonPath("$[0].name").value("jane"))
+            .andExpect((ResultMatcher) jsonPath("$[0].name").value("Jane"))
             .andExpect((ResultMatcher) jsonPath("$[0].twitter").value("jane"));
 
-        verify(userService).matches("michael", "FR");
+        verify(userService).matches("Emile", "FR");
 
     }
 
