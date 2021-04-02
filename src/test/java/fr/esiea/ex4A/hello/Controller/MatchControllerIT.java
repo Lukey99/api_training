@@ -42,13 +42,13 @@ public class MatchControllerIT {
         userService.registerUser(userInfo2);
         userService.registerUser(userInfo3);
 
-        when(userService.matches("Emile", "FR")).thenReturn(List.of(userInfo2));
+        when(userService.matches("Emile", "US")).thenReturn(List.of(userInfo2));
 
         mockMvc
-            .perform(MockMvcRequestBuilders.get("/api/matches?userName=Emile&userCountry=FR"))
+            .perform(MockMvcRequestBuilders.get("/api/matches?userName=Emile&userCountry=US"))
             .andExpect(status().isOk())
-            .andExpect((ResultMatcher) jsonPath("$[0].name").value("Jane"))
-            .andExpect((ResultMatcher) jsonPath("$[0].twitter").value("jane"));
+            .andExpect((ResultMatcher) jsonPath("$[0].name").value("Isabelle"))
+            .andExpect((ResultMatcher) jsonPath("$[0].twitter").value("isabelle"));
 
         verify(userService).matches("Emile", "FR");
 
